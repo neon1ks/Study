@@ -73,4 +73,6 @@ Thumbs.db
 
 # Build
 build*
+CMakeLists.txt.user
+
 
