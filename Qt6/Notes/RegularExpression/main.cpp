@@ -9,85 +9,96 @@
 
 void printResult(const QString &s, bool result)
 {
-	if (result)
-	{
-		qDebug() << s << " is true";
-	}
-	else
-	{
-		qDebug() << s << "is false";
-	}
+    if (result) {
+        qDebug() << s << " is true";
+    } else {
+        qDebug() << s << "is false";
+    }
 }
 
 void testRegularExpression(const QString &pattern, const QStringList &tokens)
 {
 
-	qDebug() << "pattern = " << pattern;
+    qDebug() << "pattern = " << pattern;
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-	qDebug() << "QRegExp";
+    qDebug() << "QRegExp";
 
-	QRegExp regExp1(pattern);
-	for (const auto &t : tokens)
-	{
-		printResult(t, regExp1.exactMatch(t));
-	}
+    QRegExp regExp1(pattern);
+    for (const auto &t : tokens) {
+        printResult(t, regExp1.exactMatch(t));
+    }
 
 #endif
 
-	qDebug() << "QRegularExpression";
+    qDebug() << "QRegularExpression";
 
-	QString anchoredPattern = QRegularExpression::anchoredPattern(pattern);
-	QRegularExpression regExp(anchoredPattern);
-	for (const auto &t : tokens)
-	{
-		printResult(t, regExp.match(t).hasMatch());
-	}
+    QString anchoredPattern = QRegularExpression::anchoredPattern(pattern);
+    QRegularExpression regExp(anchoredPattern);
+    for (const auto &t : tokens) {
+        printResult(t, regExp.match(t).hasMatch());
+    }
 }
 
 void test2()
 {
-	qDebug() << "\ntest2\n";
+    qDebug() << "\ntest2\n";
 
-	QStringList tokens;
-	tokens.append("A1");
-	tokens.append("A12");
-	tokens.append("A123");
-	tokens.append("A1234");
-	tokens.append("AB123");
+    QStringList tokens;
+    tokens.append("A1");
+    tokens.append("A12");
+    tokens.append("A123");
+    tokens.append("A1234");
+    tokens.append("AB123");
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-	qDebug() << "QRegExp";
-	QRegExp re1("[A-Za-z][1-9][0-9]{0,2}");
-	for (const auto &t : tokens)
-	{
-		printResult(t, re1.exactMatch(t));
-	}
+    qDebug() << "QRegExp";
+    QRegExp re1("[A-Za-z][1-9][0-9]{0,2}");
+    for (const auto &t : tokens) {
+        printResult(t, re1.exactMatch(t));
+    }
 #endif
 
-	qDebug() << "QRegularExpression";
-	QRegularExpression re2("^[A-Za-z][1-9][0-9]{0,2}$");
-	for (const auto &t : tokens)
-	{
-		printResult(t, re2.match(t).hasMatch());
-	}
+    qDebug() << "QRegularExpression";
+    QRegularExpression re2("^[A-Za-z][1-9][0-9]{0,2}$");
+    for (const auto &t : tokens) {
+        printResult(t, re2.match(t).hasMatch());
+    }
+}
+
+void test3()
+{
+    QString pattern("\\<nav[ >]");
+
+    QStringList tokens;
+    tokens.append("<nav>");
+    tokens.append("<navigator>");
+    tokens.append("<nav class=\"test\">");
+    tokens.append("<n>");
+    tokens.append("<n class>");
+
+    QRegularExpression regExp(pattern);
+    for (const auto &t : tokens) {
+        printResult(t, regExp.match(t).hasMatch());
+    }
 }
 
 auto main() -> int
 {
 
-	QString pattern("[A-Za-z][1-9][0-9]{0,2}");
+    //    QString pattern("[A-Za-z][1-9][0-9]{0,2}");
 
-	QStringList tokens;
-	tokens.append("A1");
-	tokens.append("A12");
-	tokens.append("A123");
-	tokens.append("A1234");
-	tokens.append("AB123");
+    //    QStringList tokens;
+    //    tokens.append("A1");
+    //    tokens.append("A12");
+    //    tokens.append("A123");
+    //    tokens.append("A1234");
+    //    tokens.append("AB123");
 
-	testRegularExpression(pattern, tokens);
+    //    testRegularExpression(pattern, tokens);
 
-	test2();
+    //    test2();
 
-	return 0;
+    test3();
+    return 0;
 }
