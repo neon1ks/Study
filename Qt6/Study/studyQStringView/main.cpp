@@ -144,6 +144,8 @@ int main()
     QStringView strView1 = str1;
     QStringView strView2 = str2;
 
+    strView2 = strView2.sliced(1);
+
     if (strView1 == strView2) {
         qDebug() << "compare";
     }
