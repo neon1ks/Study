@@ -3,7 +3,7 @@
 
 message = input("Enter a message: ")
 new_message = ""
-VOWELS = "aeiou"
+VOWELS = "aeiouаеёиоуыэюя"
 
 print()
 for letter in message:

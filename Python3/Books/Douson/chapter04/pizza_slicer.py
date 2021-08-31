@@ -26,10 +26,17 @@ while start != "":
     if start:
         start = int(start)
 
-        finish = int(input("Finish: "))
 
-        print("word[", start, ":", finish, "] is", end=" ")
-        print(word[start:finish])
+        finish = input("Finish: ")
+        if finish:
+            finish = int(finish)
+            print("word[", start, ":", finish, "] is", end=" ")
+            print(word[start:finish])
+        else:
+            print("word[", start, ":] is", end=" ")
+            print(word[start:])
+            
+
   
 input("\n\nPress the enter key to exit.")
 

@@ -1,5 +1,5 @@
-# High Scores 2.0
-# Demonstrates nested sequences
+# High Scores 2.0 (Рекорды 2.0)
+# Demonstrates nested sequences (Демонстрирует вложенные последовательности)
 
 scores = []
 
@@ -8,11 +8,11 @@ while choice != "0":
 
     print(
     """
-    High Scores 2.0
+    High Scores 2.0 (рекорды 2.0)
     
-    0 - Quit
-    1 - List Scores
-    2 - Add a Score
+    0 - Quit (Выйти)
+    1 - List Scores (Показать рекорды)
+    2 - Add a Score (Добавить рекорд)
     """
     )
     

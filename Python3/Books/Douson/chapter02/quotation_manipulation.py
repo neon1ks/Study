@@ -8,10 +8,10 @@ print("Original quote:")
 print(quote)
 
 print("\nIn uppercase:")
-print(quote.upper())
+print(quote.upper()) # Прописные буквы
 
 print("\nIn lowercase:")
-print(quote.lower())
+print(quote.lower()) # Строчные буквы
 
 print("\nAs a title:")
 print(quote.title())

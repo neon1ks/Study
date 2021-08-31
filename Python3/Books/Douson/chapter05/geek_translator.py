@@ -9,17 +9,17 @@ geek = {"404": "clueless.  From the web error message 404, meaning page not foun
         "Uninstalled" : "being fired.  Especially popular during the dot-bomb era."}  
 
 choice = None
-while choice != "0":
+while choice != "0" and choice != "":
 
-    print(
-    """
+    print("""
     Geek Translator
     
-    0 - Quit
-    1 - Look Up a Geek Term
-    2 - Add a Geek Term
-    3 - Redefine a Geek Term
-    4 - Delete a Geek Term
+    0 - Quit (Выйти)
+    1 - Look Up a Geek Term (Найти толкование термина)
+    2 - Add a Geek Term (Добавить термин)
+    3 - Redefine a Geek Term (Изменить толкование)
+    4 - Delete a Geek Term (Удалить термин)
+    5 - Print
     """
     )
     
@@ -27,7 +27,7 @@ while choice != "0":
     print()
 
     # exit
-    if choice == "0":
+    if choice == "0" or choice == "":
         print("Good-bye.")
 
     # get a definition
@@ -67,7 +67,9 @@ while choice != "0":
             print("\nOkay, I deleted", term)
         else:
             print("\nI can't do that!", term, "doesn't exist in the dictionary.")
-            
+    elif choice == "5":
+        for item in geek:
+            print(item, "—", geek[item])
     # some unknown choice
     else:
         print("\nSorry, but", choice, "isn't a valid choice.")
