@@ -76,4 +76,5 @@ build*
 CMakeLists.txt.user
 .idea
 
+.ipynb_checkpoints
 
