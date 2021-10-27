@@ -49,14 +49,14 @@ bool MainWindow::readFile(const QString &fileName)
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         textEdit->setText(file.readAll());
     }
-    /*{
-        QTextStream stream(&file);
-        while (!stream.atEnd()) {
-            line = stream.readLine();
-            textEdit->setText(textEdit->toPlainText() + line + "\n");
-            qDebug() << "linea: " << line;
-        }
-    }*/
+    // {
+    //     QTextStream stream(&file);
+    //     while (!stream.atEnd()) {
+    //         line = stream.readLine();
+    //         textEdit->setText(textEdit->toPlainText() + line + "\n");
+    //         qDebug() << "linea: " << line;
+    //     }
+    // }
     file.close();
     return true;
 }

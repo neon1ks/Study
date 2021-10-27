@@ -4,29 +4,31 @@
 
 constexpr const double PI = 3.141592653589793;
 
-using namespace std;
+//using namespace std;
 
 // Проверка на равенство вещественных чисел, взято из Qt
 // https://github.com/qt/qtbase/blob/dev/src/corelib/global/qglobal.h
 
 [[nodiscard]] constexpr bool qFuzzyCompare(double p1, double p2)
 {
-    return (abs(p1 - p2) * 1000000000000. <= min(abs(p1), abs(p2)));
+    return (std::abs(p1 - p2) * 1000000000000.
+            <= std::min(std::abs(p1), std::abs(p2)));
 }
 
 [[nodiscard]] constexpr bool qFuzzyCompare(float p1, float p2)
 {
-    return (abs(p1 - p2) * 100000.F <= min(abs(p1), abs(p2)));
+    return (std::abs(p1 - p2) * 100000.F
+            <= std::min(std::abs(p1), std::abs(p2)));
 }
 
 [[nodiscard]] constexpr bool qFuzzyIsNull(double d)
 {
-    return abs(d) <= 0.000000000001;
+    return std::abs(d) <= 0.000000000001;
 }
 
 [[nodiscard]] constexpr bool qFuzzyIsNull(float f)
 {
-    return abs(f) <= 0.00001F;
+    return std::abs(f) <= 0.00001F;
 }
 
 int main()
@@ -43,9 +45,10 @@ int main()
         } else if (qFuzzyCompare(x, 1.4)) {
             Q = a * pow(x, 2) + 7 * sqrt(x);
         } else {
-            Q = log(x + 7 * sqrt(abs(x + a)));
+            Q = log(x + 7 * sqrt(std::abs(x + a)));
         }
-        cout << "x = " << setw(3) << x << ", Q = " << setw(9) << Q << endl;
+        std::cout << "x = " << std::setw(3) << x << ", Q = " << std::setw(9)
+                  << Q << std::endl;
         x += 0.1;
     }
 

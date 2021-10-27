@@ -17,8 +17,8 @@ class Matrix
 {
 private:
     vector<vector<int>> data;
-    int m_num_rows;
-    int m_num_cols;
+    size_t m_num_rows;
+    size_t m_num_cols;
 
 public:
     Matrix()
@@ -27,6 +27,20 @@ public:
         m_num_cols = 0;
     };
     Matrix(int num_rows, int num_cols) { Reset(num_rows, num_cols); }
+    Matrix(size_t num_rows, size_t num_cols) { Reset(num_rows, num_cols); }
+
+    void Reset(size_t num_rows, size_t num_cols)
+    {
+        m_num_rows = num_rows;
+        m_num_cols = num_cols;
+        if (num_rows == 0 || num_cols == 0) {
+            m_num_rows = 0;
+            m_num_cols = 0;
+        }
+        data = vector<vector<int>>(m_num_rows, vector<int>(m_num_cols, 0));
+        // elements_.assign(static_cast<size_t>(num_rows),
+        //         vector<int>(static_cast<size_t>(num_columns)));
+    }
 
     void Reset(int num_rows, int num_cols)
     {
@@ -36,13 +50,7 @@ public:
         if (num_cols < 0) {
             throw out_of_range("num_cols is negative");
         }
-        m_num_rows = num_rows;
-        m_num_cols = num_cols;
-        if (num_rows == 0 || num_cols == 0) {
-            m_num_rows = 0;
-            m_num_cols = 0;
-        }
-        data = vector<vector<int>>(m_num_rows, vector<int>(m_num_cols, 0));
+        Reset(static_cast<size_t>(num_rows), static_cast<size_t>(num_cols));
     }
 
     [[nodiscard]] int At(size_t row, size_t col) const
@@ -51,15 +59,15 @@ public:
     }
     int &At(size_t row, size_t col) { return data.at(row).at(col); }
 
-    [[nodiscard]] int GetNumRows() const { return m_num_rows; }
-    [[nodiscard]] int GetNumColumns() const { return m_num_cols; }
+    [[nodiscard]] size_t GetNumRows() const { return m_num_rows; }
+    [[nodiscard]] size_t GetNumColumns() const { return m_num_cols; }
 };
 
 ostream &operator<<(ostream &stream, const Matrix &value)
 {
     stream << value.GetNumRows() << ' ' << value.GetNumColumns() << endl;
-    for (int i = 0; i < value.GetNumRows(); ++i) {
-        for (int j = 0; j < value.GetNumColumns(); ++j) {
+    for (size_t i = 0; i < value.GetNumRows(); ++i) {
+        for (size_t j = 0; j < value.GetNumColumns(); ++j) {
             if (j != 0) {
                 stream << ' ';
             }
@@ -76,8 +84,8 @@ istream &operator>>(istream &stream, Matrix &value)
     int num_cols{};
     stream >> num_rows >> num_cols;
     value.Reset(num_rows, num_cols);
-    for (int i = 0; i < num_rows; ++i) {
-        for (int j = 0; j < num_cols; ++j) {
+    for (size_t i = 0; i < static_cast<size_t>(num_rows); ++i) {
+        for (size_t j = 0; j < static_cast<size_t>(num_cols); ++j) {
             stream >> value.At(i, j);
         }
     }
@@ -94,8 +102,8 @@ Matrix operator+(const Matrix &l, const Matrix &r)
     }
 
     Matrix result(l.GetNumRows(), l.GetNumColumns());
-    for (int i = 0; i < l.GetNumRows(); ++i) {
-        for (int j = 0; j < l.GetNumColumns(); ++j) {
+    for (size_t i = 0; i < l.GetNumRows(); ++i) {
+        for (size_t j = 0; j < l.GetNumColumns(); ++j) {
             result.At(i, j) = l.At(i, j) + r.At(i, j);
         }
     }
@@ -109,8 +117,8 @@ bool operator==(const Matrix &l, const Matrix &r)
             || l.GetNumColumns() != r.GetNumColumns()) {
         return false;
     }
-    for (int i = 0; i < l.GetNumRows(); ++i) {
-        for (int j = 0; j < l.GetNumColumns(); ++j) {
+    for (size_t i = 0; i < l.GetNumRows(); ++i) {
+        for (size_t j = 0; j < l.GetNumColumns(); ++j) {
             if (l.At(i, j) != r.At(i, j)) {
                 return false;
             }

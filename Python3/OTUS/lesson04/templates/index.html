@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Index</title>
+</head>
+<body>
+	<div>Welcome to index</div>
+	<div>Visit our <a href="{{ url_for('hello_page')}}">hello</a></div>
+	{% for name in names %}
+	<div>Visit our <a href="{{url_for('hello_page', name=name) }}">hello {{ name }}</a></div>
+	{% endfor %}
+</body>
+</html>

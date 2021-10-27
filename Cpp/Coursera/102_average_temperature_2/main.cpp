@@ -19,7 +19,7 @@ int main()
     vector<unsigned> warm_days;
     for (size_t i = 0; i < days.size(); ++i) {
         if (days[i] > average) {
-            warm_days.push_back(i);
+            warm_days.push_back(static_cast<unsigned>(i));
         }
     }
 

@@ -14,12 +14,12 @@ void CurrencyModel::setCurrencyMap(const QMap<QString, double> &map)
 
 int CurrencyModel::rowCount(const QModelIndex & /* parent */) const
 {
-    return currencyMap.count();
+    return static_cast<int>(currencyMap.count());
 }
 
 int CurrencyModel::columnCount(const QModelIndex & /* parent */) const
 {
-    return currencyMap.count();
+    return static_cast<int>(currencyMap.count());
 }
 
 QVariant CurrencyModel::data(const QModelIndex &index, int role) const

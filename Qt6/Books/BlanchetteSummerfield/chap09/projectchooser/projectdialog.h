@@ -11,7 +11,7 @@ class ProjectDialog : public QDialog, private Ui::ProjectDialog
 
 public:
     ProjectDialog(QWidget *parent = nullptr);
-    ~ProjectDialog() = default;
+    ~ProjectDialog() override = default;
 
 public slots:
     void on_leftButton_clicked();

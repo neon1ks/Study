@@ -36,14 +36,20 @@ public:
 
         num_rows_ = num_rows;
         num_columns_ = num_columns;
-        elements_.assign(num_rows, vector<int>(num_columns));
+        elements_.assign(static_cast<size_t>(num_rows),
+                vector<int>(static_cast<size_t>(num_columns)));
     }
 
-    int &At(int row, int column) { return elements_.at(row).at(column); }
+    int &At(int row, int column)
+    {
+        return elements_.at(static_cast<size_t>(row))
+                .at(static_cast<size_t>(column));
+    }
 
     [[nodiscard]] int At(int row, int column) const
     {
-        return elements_.at(row).at(column);
+        return elements_.at(static_cast<size_t>(row))
+                .at(static_cast<size_t>(column));
     }
 
     [[nodiscard]] int GetNumRows() const { return num_rows_; }
