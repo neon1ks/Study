@@ -7,9 +7,9 @@ TimerDemoWidget::TimerDemoWidget(QWidget *parent) : QWidget(parent)
 {
     setAutoFillBackground(true);
 
-    QPalette palette1(this->palette());
-    palette1.setColor(QPalette::Window, Qt::black);
-    setPalette(palette1);
+    // Работает в Qt 5.12.8
+    setAttribute(Qt::WA_StyledBackground, true);
+    setStyleSheet("background-color: red;");
 
     connect(&m_timer, &QTimer::timeout, this,
             &TimerDemoWidget::setRandomBackgroundColor);
