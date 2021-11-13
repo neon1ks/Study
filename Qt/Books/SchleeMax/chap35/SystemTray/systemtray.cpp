@@ -15,7 +15,8 @@ SystemTray::SystemTray(QWidget *pwgt /*=nullptr*/)
             &SystemTray::slotShowMessage);
 
     auto *pactChangeIcon = new QAction("&Change Icon", this);
-    connect(pactChangeIcon, &QAction::triggered, this, &SystemTray::slotChangeIcon);
+    connect(pactChangeIcon, &QAction::triggered, this,
+            &SystemTray::slotChangeIcon);
 
     auto *pactQuit = new QAction("&Quit", this);
     //connect(pactQuit, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -53,17 +54,17 @@ void SystemTray::slotShowMessage()
     m_ptrayIcon->showMessage("For your information",
             "You have selected the "
             "\"Show Message!\" option",
-            QSystemTrayIcon::Information, 3000);
+//            QSystemTrayIcon::Information, 3000);
+            QPixmap(":/images/santa.svg"), 3000);
 }
 
 void SystemTray::slotChangeIcon()
 {
     m_bIconSwitcher = !m_bIconSwitcher;
-    QString strPixmapName =
-            m_bIconSwitcher ? ":/images/img1.bmp" : ":/images/img2.bmp";
+    QString strPixmapName = m_bIconSwitcher ? ":/images/asterisk.svg"
+                                            : ":/images/asterisk_smoothed.svg";
     m_ptrayIcon->setIcon(QPixmap(strPixmapName));
 }
-
 
 void SystemTray::slotExit()
 {

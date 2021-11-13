@@ -2,5 +2,8 @@
 <qresource>
     <file>images/img1.bmp</file>
     <file>images/img2.bmp</file>
+    <file>images/asterisk.svg</file>
+    <file>images/santa.svg</file>
+    <file>images/asterisk_smoothed.svg</file>
 </qresource>
 </RCC>
