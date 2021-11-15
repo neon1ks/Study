@@ -12,7 +12,7 @@ class Ping : public QObject
 public:
     explicit Ping(QObject *parent = nullptr);
 
-    QString operatingSystem();
+    static QString operatingSystem();
     QString getAddress() const;
     void setAddress(const QString &address);
 
@@ -29,7 +29,7 @@ private slots:
     void finished(int exitCode, QProcess::ExitStatus exitStatus);
     void readyReadStandardError();
     void readyReadStandardOutput();
-    void started();
+    static void started();
     void stateChanged(QProcess::ProcessState newState);
     void readyRead();
 
@@ -37,7 +37,7 @@ private:
     QProcess m_process;
     QString m_address;
     bool m_listening;
-    QString getProcess();
+    static QString getProcess();
     void startPing();
 };
 

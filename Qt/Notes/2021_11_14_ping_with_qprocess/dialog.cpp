@@ -4,7 +4,7 @@
 Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
 {
     ui->setupUi(this);
-    ui->lblOS->setText("OS Detected: " + m_ping.operatingSystem());
+    ui->lblOS->setText("OS Detected: " + Ping::operatingSystem());
 
     m_ping.setAddress(ui->txtIP->text());
 

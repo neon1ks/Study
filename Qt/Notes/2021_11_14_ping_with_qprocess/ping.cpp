@@ -40,7 +40,8 @@ void Ping::start()
 
     qInfo() << Q_FUNC_INFO;
     m_listening = true;
-    m_process.start(getProcess());
+    QStringList arguments;
+    m_process.start(getProcess(), arguments);
 }
 
 void Ping::stop()
@@ -84,8 +85,10 @@ void Ping::readyReadStandardOutput()
     if (!m_listening)
         return;
     qInfo() << Q_FUNC_INFO;
-    QByteArray data = m_process.readAllStandardOutput();
-    emit output(QString(data.trimmed()));
+    QByteArray data = m_process.readAllStandardOutput().trimmed();
+    if (!data.isEmpty()) {
+        emit output(QString(data));
+    }
 }
 
 void Ping::started()
@@ -119,7 +122,9 @@ void Ping::readyRead()
     qInfo() << Q_FUNC_INFO;
     QByteArray data = m_process.readAll().trimmed();
     qInfo() << data;
-    emit output(data);
+    if (!data.isEmpty()) {
+        emit output(data);
+    }
 }
 
 QString Ping::getProcess()
@@ -137,7 +142,7 @@ QString Ping::getProcess()
 void Ping::startPing()
 {
     QByteArray command;
-    command.append("ping -s 1000 " + m_address);
+    command.append("ping -s 1000 " + m_address.toLatin1());
     if (QSysInfo::productType() == "windows")
         command.append("\r");
     command.append("\n");
