@@ -33,20 +33,20 @@ public:
     {
         std::lock_guard<std::mutex> guard(m_mtx);
 
-        try {
-            std::ostringstream oss;
-            std::ifstream inFile(m_xmlInFileName);
-            if (inFile.is_open()) {
-                oss << std::ifstream(m_xmlInFileName).rdbuf();
+        std::ostringstream oss;
+        std::ifstream inFile(m_xmlInFileName);
+        if (inFile.is_open()) {
+            oss << std::ifstream(m_xmlInFileName).rdbuf();
+            inFile.close();
+            try {
                 m_json = xml2json(oss.str().data());
-                inFile.close();
-            } else {
-                std::cout << "Unable to open file: " + m_xmlInFileName << std::endl;
+            } catch (const std::exception &e) {
+                std::cout << e.what() << std::endl;
+            } catch (...) {
+                std::cout << "Convert Error" << std::endl;
             }
-        } catch (const std::exception &e) {
-            std::cout << e.what() << std::endl;
-        } catch (...) {
-            std::cout <<"Convert Error" << std::endl;
+        } else {
+            std::cout << "Unable to open file: " + m_xmlInFileName << std::endl;
         }
     }
     auto writeFile() -> void
